@@ -3,63 +3,17 @@ import {
   maintainTiers,
   fixTiers,
   quotedServices,
-  type PriceTier,
 } from "@/lib/pricing";
+import { services } from "@/lib/services";
+import TierCard from "@/components/TierCard";
+import Portfolio from "@/components/Portfolio";
 
 /*
- * CONTACT FORM SETUP
- * 1. Create the form at tally.so (free tier) using the field spec in
- *    docs/CONTACT-FORM.md.
- * 2. Copy the form ID from the form's public URL
- *    (tally.so/r/XXXXXXXX -> the XXXXXXXX part).
- * 3. Paste it below. The embedded form replaces the placeholder automatically.
+ * CONTACT FORM: Tally free tier, live.
+ * Form: https://tally.so/r/OQa5xg - setup doc in docs/CONTACT-FORM.md.
+ * Submissions email-notify chaotic.minds.info@gmail.com.
  */
-const TALLY_FORM_ID = ""; // <- paste form ID here
-
-const services = [
-  {
-    title: "Build",
-    tagline: "New sites, done right",
-    body:
-      "From a single landing page to a full business site. Built on modern, maintainable technology so it is easy to grow and cheap to run.",
-  },
-  {
-    title: "Maintain",
-    tagline: "Staying healthy",
-    body:
-      "Updates, backups, monitoring, and content changes. Your site stays current and secure without you thinking about it.",
-  },
-  {
-    title: "Fix",
-    tagline: "Breaking things apart",
-    body:
-      "Something broken, slow, or compromised? Diagnostics first, then a clear fix and a plain-English explanation of what happened.",
-  },
-];
-
-function TierCard({ tier }: { tier: PriceTier }) {
-  return (
-    <div
-      className={`rounded-xl border p-6 ${
-        tier.highlight
-          ? "border-volt/60 bg-steel/60"
-          : "border-steel bg-coal/60"
-      }`}
-    >
-      <h3 className="text-lg font-semibold text-white">{tier.name}</h3>
-      <p className="mt-1 text-2xl font-bold text-volt">{tier.price}</p>
-      <p className="mt-2 text-sm">{tier.blurb}</p>
-      <ul className="mt-4 space-y-2 text-sm">
-        {tier.points.map((point) => (
-          <li key={point} className="flex gap-2">
-            <span className="text-volt">/</span>
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+const TALLY_FORM_ID = "OQa5xg";
 
 export default function Home() {
   return (
@@ -110,6 +64,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Portfolio */}
+      <Portfolio />
+
       {/* Pricing */}
       <section id="pricing" className="mx-auto max-w-5xl px-6 py-20">
         <h2 className="text-3xl font-bold text-white">Pricing</h2>
@@ -118,28 +75,24 @@ export default function Home() {
           remotely. Bigger jobs are quoted per project so you always know the
           number before work starts.
         </p>
-
         <h3 className="mt-12 text-xl font-semibold text-volt">Build</h3>
         <div className="mt-4 grid gap-6 sm:grid-cols-2">
           {buildTiers.map((tier) => (
             <TierCard key={tier.name} tier={tier} />
           ))}
         </div>
-
         <h3 className="mt-12 text-xl font-semibold text-volt">Maintain</h3>
         <div className="mt-4 grid gap-6 sm:grid-cols-3">
           {maintainTiers.map((tier) => (
             <TierCard key={tier.name} tier={tier} />
           ))}
         </div>
-
         <h3 className="mt-12 text-xl font-semibold text-volt">Fix</h3>
         <div className="mt-4 grid gap-6 sm:grid-cols-2">
           {fixTiers.map((tier) => (
             <TierCard key={tier.name} tier={tier} />
           ))}
         </div>
-
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {quotedServices.map((s) => (
             <div key={s.name} className="rounded-xl border border-dashed border-steel bg-coal/40 p-6">
@@ -160,25 +113,14 @@ export default function Home() {
           Tell us what you need - a new build, ongoing care, or a fix. We reply
           to every inquiry; response time depends on the current project load.
         </p>
-        {TALLY_FORM_ID ? (
-          <iframe
-            src={`https://tally.so/embed/${TALLY_FORM_ID}?alignLeft=1&hideTitle=1&transparentBackground=1`}
-            width="100%"
-            height="520"
-            className="mt-8 rounded-xl border border-steel bg-coal/60"
-            title="Project inquiry form"
-            loading="lazy"
-          />
-        ) : (
-          <div className="mt-8 rounded-xl border border-dashed border-volt/40 bg-coal/40 p-8 text-center">
-            <p className="text-sm text-mist/70">
-              Inquiry form goes here. Until it is wired up, reach us at:
-            </p>
-            <p className="mt-2 text-lg font-semibold text-volt">
-              hello@ [domain pending]
-            </p>
-          </div>
-        )}
+        <iframe
+          src={`https://tally.so/embed/${TALLY_FORM_ID}?alignLeft=1&hideTitle=1&transparentBackground=1`}
+          width="100%"
+          height="520"
+          className="mt-8 rounded-xl border border-steel bg-coal/60"
+          title="Project inquiry form"
+          loading="lazy"
+        />
       </section>
 
       {/* Footer */}
