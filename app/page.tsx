@@ -6,6 +6,16 @@ import {
   type PriceTier,
 } from "@/lib/pricing";
 
+/*
+ * CONTACT FORM SETUP
+ * 1. Create the form at tally.so (free tier) using the field spec in
+ *    docs/CONTACT-FORM.md.
+ * 2. Copy the form ID from the form's public URL
+ *    (tally.so/r/XXXXXXXX -> the XXXXXXXX part).
+ * 3. Paste it below. The embedded form replaces the placeholder automatically.
+ */
+const TALLY_FORM_ID = ""; // <- paste form ID here
+
 const services = [
   {
     title: "Build",
@@ -150,19 +160,25 @@ export default function Home() {
           Tell us what you need - a new build, ongoing care, or a fix. We reply
           to every inquiry; response time depends on the current project load.
         </p>
-        {/*
-          CONTACT FORM PLACEHOLDER.
-          Plan: embed a free-tier Tally form here (or a Resend-backed form)
-          feeding Google Workspace email. To be wired up as a separate step.
-        */}
-        <div className="mt-8 rounded-xl border border-dashed border-volt/40 bg-coal/40 p-8 text-center">
-          <p className="text-sm text-mist/70">
-            Inquiry form goes here. Until it is wired up, reach us at:
-          </p>
-          <p className="mt-2 text-lg font-semibold text-volt">
-            hello@ [domain pending]
-          </p>
-        </div>
+        {TALLY_FORM_ID ? (
+          <iframe
+            src={`https://tally.so/embed/${TALLY_FORM_ID}?alignLeft=1&hideTitle=1&transparentBackground=1`}
+            width="100%"
+            height="520"
+            className="mt-8 rounded-xl border border-steel bg-coal/60"
+            title="Project inquiry form"
+            loading="lazy"
+          />
+        ) : (
+          <div className="mt-8 rounded-xl border border-dashed border-volt/40 bg-coal/40 p-8 text-center">
+            <p className="text-sm text-mist/70">
+              Inquiry form goes here. Until it is wired up, reach us at:
+            </p>
+            <p className="mt-2 text-lg font-semibold text-volt">
+              hello@ [domain pending]
+            </p>
+          </div>
+        )}
       </section>
 
       {/* Footer */}
