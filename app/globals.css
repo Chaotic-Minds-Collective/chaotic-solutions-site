@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/*
+ * Chaotic Solutions brand tokens.
+ * Black + electric turquoise, gothic-leaning but professional.
+ * Swap the font when final branding is decided.
+ */
+@theme {
+  --color-void: #060809;
+  --color-coal: #0d1117;
+  --color-steel: #1c2530;
+  --color-mist: #9fb3c8;
+  --color-volt: #00e5ff;
+  --color-volt-dim: #00b8cc;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-mist);
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+}
+
+::selection {
+  background: var(--color-volt);
+  color: var(--color-void);
+}
