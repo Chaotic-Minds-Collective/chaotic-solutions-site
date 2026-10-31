@@ -20,6 +20,14 @@ export default function Home() {
     <main>
       {/* Hero */}
       <section className="mx-auto max-w-5xl px-6 pt-28 pb-20 text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/brand/logo-mark.svg"
+          alt="Chaotic Solutions emblem - skull with circuit window and rose"
+          width={140}
+          height={140}
+          className="mx-auto mb-8"
+        />
         <p className="text-sm uppercase tracking-[0.3em] text-volt">
           Chaotic Solutions
         </p>

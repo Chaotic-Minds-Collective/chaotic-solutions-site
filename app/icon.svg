@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="Chaotic Solutions emblem">
+  <g stroke="#f5f5f5" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M256 96c-70 0-118 50-118 118 0 42 14 66 30 84 8 9 12 20 12 33v25c0 10 8 18 18 18h116c10 0 18-8 18-18v-25c0-13 4-24 12-33 16-18 30-42 30-84 0-68-48-118-118-118z"/>
+    <ellipse cx="206" cy="248" rx="26" ry="32"/>
+    <ellipse cx="306" cy="248" rx="26" ry="32"/>
+    <path d="M256 288l-16 32h32z"/>
+    <path d="M226 354v24"/>
+    <path d="M256 354v24"/>
+    <path d="M286 354v24"/>
+  </g>
+  <rect x="196" y="140" width="120" height="84" rx="16" fill="#050505" stroke="#00e5ff" stroke-width="7"/>
+  <path d="M256 176c-12 0-20-9-20-20 0-13 10-23 23-23 15 0 27 12 27 27 0 17-14 31-31 31-19 0-35-16-35-35" stroke="#00e5ff" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <g stroke="#00e5ff" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M212 210h30l12-12h36"/>
+    <path d="M240 222h24"/>
+  </g>
+  <g fill="#00e5ff">
+    <circle cx="212" cy="210" r="6"/>
+    <circle cx="290" cy="198" r="6"/>
+    <circle cx="264" cy="222" r="5"/>
+  </g>
+</svg>
