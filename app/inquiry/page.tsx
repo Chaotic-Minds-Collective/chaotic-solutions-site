@@ -26,7 +26,7 @@ export default function InquiryPage() {
         </Link>
       </header>
       <iframe
-        src="https://tally.so/embed/OQa5xg?transparentBackground=1"
+        src="https://tally.so/embed/OQa5xg?transparentBackground=1&dynamicHeight=0"
         title="Chaotic Solutions - Project Inquiry"
         sandbox="allow-forms allow-scripts allow-same-origin"
         className="min-h-0 w-full flex-1 border-0"
