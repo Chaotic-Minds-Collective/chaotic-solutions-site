@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     "Tell us about your project. Order from the chaos. Solutions that work.",
 };
 
+/** Renders the project inquiry page with an embedded Tally form and a link to the home page. */
 export default function InquiryPage() {
   return (
     <main className="flex h-dvh flex-col bg-void">
