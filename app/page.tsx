@@ -19,13 +19,13 @@ export default function Home() {
   return (
     <main>
       {/* Hero */}
-      <section className="mx-auto max-w-5xl px-6 pt-28 pb-20 text-center">
+      <section className="mx-auto max-w-5xl px-6 pt-16 pb-16 text-center sm:pt-28 sm:pb-20">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/brand/logo-mark.svg"
+          src="/brand/emblem-512.png"
           alt="Chaotic Solutions emblem - skull with circuit window and rose"
-          width={140}
-          height={140}
+          width={120}
+          height={120}
           className="mx-auto mb-8"
         />
         <p className="text-sm uppercase tracking-[0.3em] text-volt">
@@ -54,6 +54,14 @@ export default function Home() {
             See pricing
           </a>
         </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/brand/banner-hero-1536x864.jpg"
+          alt="Chaotic Solutions hero banner"
+          width={1536}
+          height={864}
+          className="mx-auto mt-12 w-full max-w-4xl rounded-2xl border border-steel"
+        />
       </section>
 
       {/* Services */}
