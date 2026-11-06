@@ -18,9 +18,9 @@ export default function Home() {
         <p className="text-sm uppercase tracking-[0.3em] text-spark">
           Chaotic Solutions
         </p>
-        <h1 className="mt-4 text-4xl text-white sm:text-6xl">
+        <h1 className="mt-4 text-4xl sm:text-6xl">
           Order from the chaos.
-          <span className="block text-volt">Solutions that work.</span>
+          <span className="text-glow-gradient block">Solutions that work.</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg">
           Practical technology for individuals, entrepreneurs, and businesses.
@@ -54,7 +54,7 @@ export default function Home() {
       {/* Services */}
       <section className="border-t border-steel bg-coal/40">
         <div className="mx-auto max-w-5xl px-6 py-20">
-          <h2 className="text-3xl text-white">What we do</h2>
+          <h2 className="text-3xl">What we do</h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {services.map((s) => (
               <div
@@ -78,7 +78,7 @@ export default function Home() {
       {/* CTA */}
       <section className="border-t border-steel bg-coal/40">
         <div className="mx-auto max-w-5xl px-6 py-20 text-center">
-          <h2 className="text-3xl text-white">Ready when you are.</h2>
+          <h2 className="text-3xl">Ready when you are.</h2>
           <p className="mx-auto mt-3 max-w-xl">
             Tell us what needs building, fixing, or guarding. We reply to every
             inquiry.
