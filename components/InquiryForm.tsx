@@ -21,6 +21,9 @@ const BUDGET_OPTIONS = [
  */
 const LIMITS = { name: 200, email: 320, service: 300, budget: 100, message: 10000 };
 
+type FieldName = "name" | "email" | "message";
+type FieldErrors = Partial<Record<FieldName, string>>;
+
 export default function InquiryForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,19 +33,44 @@ export default function InquiryForm() {
   const [honey, setHoney] = useState(""); // honeypot - bots only
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  /* Clear a field's error as soon as the user edits that field. */
+  function clearFieldError(field: FieldName) {
+    setFieldErrors((prev) => {
+      if (!(field in prev)) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (honey) return; // honeypot filled: silently drop
 
-    if (!name.trim()) return setError("Please tell us your name.");
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
-      return setError("Please enter a valid email address.");
-    if (!message.trim()) return setError("Please include a short message.");
+    // A retry starts a fresh error state.
+    setSubmitError(null);
+
+    const errors: FieldErrors = {};
+    if (!name.trim()) {
+      errors.name = "Please tell us your name.";
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!message.trim()) {
+      errors.message = "Please include a short message.";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+    setFieldErrors({});
 
     setSending(true);
-    setError(null);
 
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/inquiries`, {
@@ -67,7 +95,8 @@ export default function InquiryForm() {
       }
       setDone(true);
     } catch (err) {
-      setError(
+      // Stays visible until the user retries.
+      setSubmitError(
         "Something went wrong sending your message. Please try again, or email us directly."
       );
     } finally {
@@ -88,7 +117,10 @@ export default function InquiryForm() {
   }
 
   const fieldClass =
-    "w-full rounded-lg border border-steel bg-coal px-4 py-3 text-mist placeholder:text-mist/40 focus:border-spark focus:outline-none";
+    "w-full rounded-lg border bg-coal px-4 py-3 text-mist placeholder:text-mist/40 focus:outline-none";
+  const okFieldClass = `${fieldClass} border-steel focus:border-spark`;
+  const badFieldClass = `${fieldClass} border-volt-dim focus:border-volt`;
+  const errorTextClass = "mt-1 text-sm text-volt";
 
   return (
     <form
@@ -104,12 +136,22 @@ export default function InquiryForm() {
             id="inq-name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              clearFieldError("name");
+            }}
             maxLength={LIMITS.name}
-            className={fieldClass}
+            className={fieldErrors.name ? badFieldClass : okFieldClass}
             placeholder="Your name"
             autoComplete="name"
+            aria-invalid={fieldErrors.name ? true : undefined}
+            aria-describedby={fieldErrors.name ? "inq-name-error" : undefined}
           />
+          {fieldErrors.name && (
+            <p id="inq-name-error" className={errorTextClass}>
+              {fieldErrors.name}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="inq-email" className="mb-1 block text-sm text-mist/80">
@@ -119,13 +161,23 @@ export default function InquiryForm() {
             id="inq-email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              clearFieldError("email");
+            }}
             maxLength={LIMITS.email}
-            className={fieldClass}
+            className={fieldErrors.email ? badFieldClass : okFieldClass}
             placeholder="you@example.com"
             autoComplete="email"
             required
+            aria-invalid={fieldErrors.email ? true : undefined}
+            aria-describedby={fieldErrors.email ? "inq-email-error" : undefined}
           />
+          {fieldErrors.email && (
+            <p id="inq-email-error" className={errorTextClass}>
+              {fieldErrors.email}
+            </p>
+          )}
         </div>
         <div>
           <label
@@ -138,7 +190,7 @@ export default function InquiryForm() {
             id="inq-service"
             value={service}
             onChange={(e) => setService(e.target.value)}
-            className={fieldClass}
+            className={okFieldClass}
           >
             {SERVICE_OPTIONS.map((opt) => (
               <option key={opt}>{opt}</option>
@@ -156,7 +208,7 @@ export default function InquiryForm() {
             id="inq-budget"
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
-            className={fieldClass}
+            className={okFieldClass}
           >
             {BUDGET_OPTIONS.map((opt) => (
               <option key={opt}>{opt}</option>
@@ -172,12 +224,22 @@ export default function InquiryForm() {
         <textarea
           id="inq-message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            clearFieldError("message");
+          }}
           maxLength={LIMITS.message}
           rows={5}
-          className={fieldClass}
+          className={fieldErrors.message ? badFieldClass : okFieldClass}
           placeholder="Tell us about the project, the problem, or the idea."
+          aria-invalid={fieldErrors.message ? true : undefined}
+          aria-describedby={fieldErrors.message ? "inq-message-error" : undefined}
         />
+        {fieldErrors.message && (
+          <p id="inq-message-error" className={errorTextClass}>
+            {fieldErrors.message}
+          </p>
+        )}
       </div>
 
       {/* Honeypot: hidden from humans, catches bots */}
@@ -192,9 +254,16 @@ export default function InquiryForm() {
         aria-hidden="true"
       />
 
-      {error && (
-        <p className="mt-4 rounded-lg border border-volt-dim bg-coal px-4 py-3 text-sm text-volt">
-          {error}
+      {/*
+        Submission errors: announced to screen readers via the alert role
+        (implicit assertive live region). Persists until the next retry.
+      */}
+      {submitError && (
+        <p
+          role="alert"
+          className="mt-4 rounded-lg border border-volt-dim bg-coal px-4 py-3 text-sm text-volt"
+        >
+          {submitError}
         </p>
       )}
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-steel bg-void/85 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-y-2 px-6 py-3">
         <Link href="/" className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -16,7 +16,7 @@ export default function Header() {
             Chaotic Solutions
           </span>
         </Link>
-        <nav className="flex items-center gap-5 text-sm">
+        <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <Link href="/" className="text-mist hover:text-spark">
             Home
           </Link>
