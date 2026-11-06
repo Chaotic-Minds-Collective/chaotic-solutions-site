@@ -4,6 +4,13 @@
  * Chaotic Solutions brand tokens.
  * Palette sampled from the official banner art (Nov 2026):
  * deep electric blues + cyan sparks on pure black.
+ *
+ * NOTE: do NOT route font-family through an @theme var that references
+ * --font-pirata. The next/font variable (--font-pirata) is defined on
+ * <body> by a class, not on :root, and the indirection produced an empty
+ * var at computed time - which invalidates the whole font-family
+ * declaration and silently falls back to the body font. Reference
+ * --font-pirata directly (verified resolving on live elements).
  */
 @theme {
   --color-void: #030509;      /* near-black, blue hint - art background */
@@ -13,7 +20,6 @@
   --color-volt: #2e7dff;      /* electric blue - primary accent */
   --color-volt-dim: #1f5fd6;
   --color-spark: #18f0f0;     /* cyan spark - small highlights only */
-  --font-gothic: var(--font-pirata), serif;
 }
 
 body {
@@ -23,17 +29,29 @@ body {
 }
 
 /*
- * Headings: white with the art's cyan glow, so gothic lettering
- * reads as lit from within like the banner.
+ * Headings: gothic blackletter with the art's cyan glow - reads as
+ * lit from within like the banner. Font resolved directly from the
+ * next/font variable (see NOTE above).
  */
 h1,
 h2 {
-  font-family: var(--font-gothic);
+  font-family: var(--font-pirata), serif;
   color: #ffffff;
+  font-weight: 400;
   letter-spacing: 0.01em;
   text-shadow:
     0 0 14px rgba(24, 240, 240, 0.45),
     0 0 40px rgba(24, 240, 240, 0.2);
+}
+
+/*
+ * Plain class for gothic accents outside h1/h2 (e.g. header wordmark).
+ * Defined as ordinary CSS on purpose: a @theme-based font utility was
+ * the source of the empty-var fallback bug.
+ */
+.font-gothic {
+  font-family: var(--font-pirata), serif;
+  font-weight: 400;
 }
 
 /* Blue-to-cyan gradient text, for the hero accent line. */
