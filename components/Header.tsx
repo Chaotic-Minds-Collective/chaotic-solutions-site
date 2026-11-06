@@ -9,10 +9,10 @@ export default function Header() {
           <img
             src="/brand/emblem-512.png"
             alt="Chaotic Solutions"
-            width={32}
-            height={32}
+            width={40}
+            height={40}
           />
-          <span className="font-gothic text-lg leading-none text-white">
+          <span className="font-gothic text-2xl leading-none text-white sm:text-3xl">
             Chaotic Solutions
           </span>
         </Link>
