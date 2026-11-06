@@ -1,46 +1,45 @@
-# Contact Form Setup (Tally free tier)
+# Contact Form Setup (Tally + Supabase)
 
-## Step-by-step
+The inquiry form is live and wired to the Supabase pipeline. This document
+describes the full path and how to change or test it.
 
-1. Go to https://tally.so and sign up free (use chaotic.minds.info@gmail.com
-   so the business form lives on the business account).
-2. Click **Create form**, name it "Chaotic Solutions - Project Inquiry".
-3. Add these blocks, in order:
+## Current pipeline (2026-11-05)
 
-   | # | Block type | Label | Required? |
-   |---|------------|-------|-----------|
-   | 1 | Short answer | Your name | Yes |
-   | 2 | Email | Your email | Yes |
-   | 3 | Multiple choice | What do you need? | Yes |
-   | 4 | Long answer | Tell us about your project | Yes |
-   | 5 | Long answer | Anything else? (budget, timeline, links) | No |
+1. Visitor submits the embedded Tally form (form ID `OQa5xg`,
+   "Chaotic Solutions - Project Inquiry") on `/inquiry`.
+2. Tally sends a webhook to the Supabase Edge Function `tally-inquiry`
+   (project `sfelfrxrgszezztjyvtv`). The function URL contains a secret key -
+   it is a credential and is documented in the project notes, never in this repo.
+3. The function validates the secret key and form ID, maps field values by
+   label (with fallback indexes), and inserts a row into `public.inquiries`
+   with `status = 'new'` plus the raw payload.
+4. An insert-only RLS policy (`tally_webhook_insert_only`) allows anonymous
+   inserts but blocks reads, updates and deletes. Nobody can scrape the table.
+5. Tally notification emails go to chaotic.minds.info@gmail.com so every
+   inquiry also lands in the business inbox.
 
-   Multiple choice options for #3:
-   - New website (Build)
-   - Ongoing maintenance (Maintain)
-   - Fix something broken (Fix)
-   - Security audit
-   - Full Package (build + maintain + fix)
-   - Something else
-4. In the form settings:
-   - Turn ON **Email notifications** (sent to you on every submission - free).
-   - Set the notification email to chaotic.minds.info@gmail.com.
-   - Turn ON **Self-notifications are anonymous-free** - actually skip this,
-     default is fine.
-5. Click **Publish**, then copy the share link. It looks like
-   `https://tally.so/r/XXXXXXXX`.
-6. Send the XXXXXXXX part (the form ID) to your assistant, or edit
-   `app/page.tsx` yourself: paste it into `TALLY_FORM_ID` at the top of the
-   file, commit to main. The site auto-deploys and the form goes live.
+## Changing the form fields
 
-## Styling tips (optional, free)
+If you add or reorder fields in Tally, the Edge Function maps by label first
+and falls back to fixed indexes. Check `supabase/functions/tally-inquiry/`
+(or the function source in the Supabase dashboard) and update the label map
+to match, then redeploy the function.
 
-- Form -> Theme: pick a dark background theme so it blends with the site.
-- The embed code already requests transparent background and left alignment.
+## Testing
 
-## Why Tally (decision note)
+1. Submit a real test through the form at
+   https://solutions.chaoticmindscollective.com/inquiry
+2. Confirm the row appears in Supabase (`public.inquiries`) with mapped
+   fields and `status = 'new'`.
+3. Confirm the notification email arrives at the business inbox.
 
-- Free tier: unlimited forms, unlimited submissions, email notifications.
-- No backend code needed; embeds in one iframe.
-- If we later want a fully custom form, we swap to a Resend-backed form and
-  delete the embed. Nothing else changes.
+A synthetic end-to-end test (direct function call) passed on 2026-11-05;
+bad secret key returns 403, wrong form ID returns 400.
+
+## Why this stack (decision note)
+
+- Tally free tier: unlimited forms and submissions, email notifications.
+- Supabase Edge Function replaces the previous Make.com scenario (Make
+  organization was paused over negative credits; the Edge Function is
+  permanent and $0).
+- Keep the secret function URL out of the repo. Treat it like a password.

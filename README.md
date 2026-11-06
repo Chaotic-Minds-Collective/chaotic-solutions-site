@@ -5,12 +5,13 @@ Chaotic Minds Collective.
 
 > Order from the chaos. Solutions that work.
 
-## Stack (decided 2026-10-31)
+## Stack (updated 2026-11-05)
 
 - **Framework:** Next.js (App Router) + TypeScript + Tailwind CSS v4
-- **Hosting:** Vercel free tier (vercel.app subdomain until the real domain is registered)
-- **Backend:** existing Supabase project "Chaotic Minds Website"
-- **Contact form:** Tally free tier or Resend-backed form feeding Google Workspace email (to be wired)
+- **Hosting:** Cloudflare Workers (worker `chaotic-solutions-site`, built automatically from `main`)
+- **Domain:** solutions.chaoticmindscollective.com (DNS zone hosted on Cloudflare; migrated from IONOS on 2026-11-05)
+- **Backend:** existing Supabase project (inquiries table)
+- **Contact form:** Tally form `OQa5xg` -> Supabase Edge Function `tally-inquiry` -> `public.inquiries`
 
 ## Local development
 
@@ -23,16 +24,19 @@ Chaotic Minds Collective.
 - `app/` - pages and layout (App Router)
 - `lib/pricing.ts` - single source of truth for all service copy and pricing
 - `app/globals.css` - brand color tokens (void/coal/steel/volt = the turquoise)
+- `public/brand/` - favicon, icon and emblem asset set
 - `docs/DECISIONS.md` - running decision log
+- `docs/CONTACT-FORM.md` - inquiry form + pipeline setup
 
-## Deployment (Vercel)
+## Deployment (Cloudflare Workers)
 
-1. Push to `main`.
-2. In Vercel: Add New -> Project -> import `psyryn82/chaotic-solutions-site`.
-3. Accept the detected Next.js settings, click Deploy. No environment variables needed yet.
-4. When the chaoticmindscollective.com domain is registered, add
-   `solutions.chaoticmindscollective.com` in Vercel -> Domains and set the
-   DNS records at Cloudflare.
+1. Open a feature branch and submit a PR (never commit straight to `main`).
+2. Merge the PR - Cloudflare Workers Builds builds and deploys automatically.
+3. `solutions.chaoticmindscollective.com` is bound to the worker as a custom domain.
+
+Note: the old Vercel deployment is retired. Vercel could not build from a
+private GitHub organization repository on the Hobby plan, which is why hosting
+moved to Cloudflare Workers.
 
 ## Pricing/copy rules
 
