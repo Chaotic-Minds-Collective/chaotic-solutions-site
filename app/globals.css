@@ -2,16 +2,18 @@
 
 /*
  * Chaotic Solutions brand tokens.
- * Black + electric turquoise, gothic-leaning but professional.
- * Swap the font when final branding is decided.
+ * Palette sampled from the official banner art (Nov 2026):
+ * deep electric blues + cyan sparks on pure black.
  */
 @theme {
-  --color-void: #060809;
-  --color-coal: #0d1117;
-  --color-steel: #1c2530;
-  --color-mist: #9fb3c8;
-  --color-volt: #00e5ff;
-  --color-volt-dim: #00b8cc;
+  --color-void: #030509;      /* near-black, blue hint - art background */
+  --color-coal: #0a1322;      /* deep navy panel */
+  --color-steel: #1b2a45;     /* navy border */
+  --color-mist: #9fb3c8;      /* body text */
+  --color-volt: #2e7dff;      /* electric blue - primary accent */
+  --color-volt-dim: #1f5fd6;
+  --color-spark: #18f0f0;     /* cyan spark - small highlights only */
+  --font-gothic: var(--font-pirata), serif;
 }
 
 body {
@@ -20,7 +22,13 @@ body {
   font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
 }
 
+h1,
+h2 {
+  font-family: var(--font-gothic);
+  letter-spacing: 0.01em;
+}
+
 ::selection {
-  background: var(--color-volt);
+  background: var(--color-spark);
   color: var(--color-void);
 }

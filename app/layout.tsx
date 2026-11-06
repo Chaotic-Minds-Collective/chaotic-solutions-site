@@ -1,5 +1,21 @@
 import type { Metadata } from "next";
+import { Inter, Pirata_One } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
+
+const gothic = Pirata_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pirata",
+  display: "swap",
+});
+
+const sans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const SITE_URL = "https://solutions.chaoticmindscollective.com";
 const SITE_TITLE = "Chaotic Solutions - Order from the chaos";
@@ -50,7 +66,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className={`${gothic.variable} ${sans.variable} antialiased`}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
