@@ -72,7 +72,60 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Portfolio */}
+      {/* About */}
+      <section className="border-t border-steel">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <div className="grid gap-10 sm:grid-cols-2">
+            <div>
+              <h2 className="text-3xl">Who we are</h2>
+              <p className="mt-6">
+                Chaotic Solutions is the technology services division of
+                Chaotic Minds Collective - owner-operated, based in Enumclaw,
+                Washington, and serving clients locally and remotely.
+              </p>
+              <p className="mt-4">
+                We exist for a simple reason: most people should not have to
+                think about the machinery behind their website. You describe
+                what you need in plain English; we handle the build, the
+                upkeep, and the security - and we explain every decision along
+                the way.
+              </p>
+            </div>
+            <ul className="space-y-6 self-center">
+              <li className="rounded-xl border border-steel bg-coal/60 p-5">
+                <h3 className="font-semibold text-white">
+                  You work with the owner
+                </h3>
+                <p className="mt-1 text-sm">
+                  No account managers, no ticket black holes. The person who
+                  builds your site is the person who answers your message.
+                </p>
+              </li>
+              <li className="rounded-xl border border-steel bg-coal/60 p-5">
+                <h3 className="font-semibold text-white">
+                  Security is not an add-on
+                </h3>
+                <p className="mt-1 text-sm">
+                  Every site we build gets HTTPS, hardened headers, and
+                  dependency hygiene from day one - not as a paid extra.
+                </p>
+              </li>
+              <li className="rounded-xl border border-steel bg-coal/60 p-5">
+                <h3 className="font-semibold text-white">
+                  Plain English, always
+                </h3>
+                <p className="mt-1 text-sm">
+                  You will never be left wondering what happened to your site
+                  or why. If something breaks, you get the cause and the fix
+                  in words that make sense.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Work */}
       <Portfolio />
 
       {/* CTA */}
