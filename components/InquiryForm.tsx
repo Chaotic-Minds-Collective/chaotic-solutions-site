@@ -1,3 +1,4 @@
+/** Renders the shared Tally project inquiry form in a sandboxed iframe. */
 export default function InquiryForm() {
   return (
     <iframe
