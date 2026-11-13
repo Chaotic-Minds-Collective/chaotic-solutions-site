@@ -1,4 +1,7 @@
-# chaotic-solutions-site
+# Chaotic Minds Solutions
+
+The website for **Chaotic Minds Solutions (CMS)**, the technology and IT services brand within Chaotic Minds Collective.
+
 
 Website for Chaotic Solutions, the technology and IT services division of
 Chaotic Minds Collective.
