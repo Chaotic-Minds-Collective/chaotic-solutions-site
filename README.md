@@ -2,10 +2,6 @@
 
 The website for **Chaotic Minds Solutions (CMS)**, the technology and IT services brand within Chaotic Minds Collective.
 
-
-Website for Chaotic Solutions, the technology and IT services division of
-Chaotic Minds Collective.
-
 > Order from the chaos. Solutions that work.
 
 ## Stack (updated 2026-11-05)
