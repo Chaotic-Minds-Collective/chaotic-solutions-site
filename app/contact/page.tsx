@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import InquiryForm from "@/components/InquiryForm";
 
 export const metadata: Metadata = {
-  title: "Start a project - Chaotic Solutions",
+  title: "Start a project - Chaotic Minds Solutions",
   description:
     "Tell us what you need - a new website build, ongoing care, or a fix. We reply to every inquiry.",
 };
