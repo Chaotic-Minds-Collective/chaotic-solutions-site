@@ -8,7 +8,7 @@ import {
 import TierCard from "@/components/TierCard";
 
 export const metadata: Metadata = {
-  title: "Pricing - Chaotic Solutions",
+  title: "Pricing - Chaotic Minds Solutions",
   description:
     "Straightforward rates for website builds, maintenance plans, and fix-it work. Bigger jobs quoted per project.",
 };

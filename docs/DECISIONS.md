@@ -9,7 +9,7 @@ Key decisions with dates. Update this file when a decision changes.
 | 2026-10-31 | Pricing v1: Build $750/$1,500; Maintain $50/$100/$175/mo; Fix $65/hr, audit $300; Full Package + Rescue quoted per project | DECIDED (draft) |
 | 2026-10-31 | Service area: local AND remote | DECIDED |
 | 2026-10-31 | Response time: depends on the project | DECIDED |
-| 2026-10-31 | Portfolio cleared: FQ SNRG MMA site, The Diagnostic Bay, Chaotic Command | DECIDED |
+| 2026-10-31 | Portfolio cleared: FQ SNRG MMA site, Grease Dojo, Chaotic Minds Command | DECIDED |
 | 2026-10-31 | Logo/brand: build with placeholders, swap when final | DECIDED |
 | 2026-10-31 | Domains: Cloudflare DNS, bought one at a time by Danielle (never auto-registered) | DECIDED |
 | 2026-11-05 | Hosting: Vercel -> Cloudflare Workers. Reason: Vercel Hobby plan cannot build from a private GitHub organization repository; Cloudflare Workers Builds works from `main` | DECIDED |

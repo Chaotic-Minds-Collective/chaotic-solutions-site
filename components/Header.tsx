@@ -8,12 +8,12 @@ export default function Header() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/brand/emblem-512.png"
-            alt="Chaotic Solutions"
+            alt="Chaotic Minds Solutions"
             width={40}
             height={40}
           />
           <span className="font-gothic text-2xl leading-none text-white sm:text-3xl">
-            Chaotic Solutions
+            Chaotic Minds Solutions
           </span>
         </Link>
         <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
