@@ -18,7 +18,7 @@ const sans = Inter({
 });
 
 const SITE_URL = "https://solutions.chaoticmindscollective.com";
-const SITE_TITLE = "Chaotic Solutions - Order from the chaos";
+const SITE_TITLE = "Chaotic Minds Solutions - Order from the chaos";
 const SITE_DESCRIPTION =
   "Practical technology solutions for individuals, entrepreneurs, and businesses. Website build, maintenance, security audits, and fix-it support.";
 
@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Chaotic Solutions",
+    siteName: "Chaotic Minds Solutions",
     type: "website",
     images: [
       {
         url: "/brand/og-image-1200x630.jpg",
         width: 1200,
         height: 630,
-        alt: "Chaotic Solutions - Order from the chaos",
+        alt: "Chaotic Minds Solutions - Order from the chaos",
       },
     ],
   },
